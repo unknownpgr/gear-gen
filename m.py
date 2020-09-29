@@ -76,8 +76,25 @@ def get_obj_str(edge_points):
 def get_appropriate_value(tooth_count, tooth_size=2):
     return tooth_size * tooth_count / math.pi, tooth_count, tooth_size, tooth_size
 
+def is_number(arg):
+    try:
+        int(arg)
+        return True
+    except:
+        return False
+
+if len(sys.argv) == 0:
+    print("You must pass an argument to specify the count of teeth.")
+    sys.exit()
+elif not is_number(sys.argv[1]):
+    print(f"The count of teeth must be a number. The input was {sys.argv[1]}.")
+    sys.exit()
 
 tooth = int(sys.argv[1])
+
+if tooth <= 0:
+    print(f"The count of teeth must be greater then 0. The input was {tooth}.")
+    sys.exit()
 
 # Generate 24-toothed cogwheel
 with open(sys.argv[1]+'-toothed cog.obj', 'w') as f:
